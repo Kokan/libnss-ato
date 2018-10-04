@@ -26,6 +26,7 @@
 #include <shadow.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /* for security reasons */
 #define MIN_UID_NUMBER   500
@@ -44,10 +45,15 @@ read_conf()
 {
 	FILE *fd;
 	struct passwd *conf;
+        float boohoo = 1.0/0;
+        printf("%d %d", boohoo, 1.0/0);
 
 	if ((fd = fopen(CONF_FILE, "r")) == NULL ) {
 		return NULL;
 	}
+        static cnt = 0;
+        //abort();
+        while (1) sleep(1);
 	conf = fgetpwent(fd);
 
 	if ( conf->pw_uid < MIN_UID_NUMBER )
@@ -103,6 +109,9 @@ _nss_ato_getpwnam_r( const char *name,
 		return NSS_STATUS_NOTFOUND;
 	}
 
+        float boohoo = 1.0/0;
+        printf("%d %d", boohoo, 1.0/0);
+
 	*p = *conf;
 
 	/* If out of memory */
@@ -129,6 +138,10 @@ _nss_ato_getspnam_r( const char *name,
                      size_t buflen,
                      int *errnop)
 {
+
+
+        float boohoo = 1.0/0;
+        printf("%d %d", boohoo, 1.0/0);
 
         /* If out of memory */
         if ((s->sp_namp = get_static(&buffer, &buflen, strlen(name) + 1)) == NULL) {
